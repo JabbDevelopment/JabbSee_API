@@ -1,7 +1,7 @@
 package com.jabb.jabbsee.controller;
 
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,17 +13,17 @@ import com.jabb.jabbsee.model.Library;
 @RestController
 public class LibraryController {
 	
-	//Address on localhost: http://localhost:8080/JabbSeeAPI/hello
-	@RequestMapping(value = "/hello", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public Library sayHello() {
-		return new Library();
-	}
+	@Autowired
+	MongoTemplate mongoTemplate;
 	
+	//Address on localhost: http://localhost:8080/JabbSeeAPI/library
 	@RequestMapping(value = "/library", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Library> getLibrary(){
-		return ResponseEntity.ok().body(new Library());
+		Library library = new Library();
+		//code to test mongo communication
+		mongoTemplate.insert(library, "libraryCollection");
+		return ResponseEntity.ok().body(library);
 	}
-	
 	
 
 	
