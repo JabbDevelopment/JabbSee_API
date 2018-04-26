@@ -8,8 +8,9 @@ public class Library {
 	
 	public Library() {
 		this.seriesList = new ArrayList<>();
+		//temporary code for testing db
 		Serie serie1 = new Serie("arrow");
-		Serie serie2 = new Serie("once");
+		Serie serie2 = new Serie("game of thrones");
 		this.seriesList.add(serie1);
 		this.seriesList.add(serie2);
 	}
