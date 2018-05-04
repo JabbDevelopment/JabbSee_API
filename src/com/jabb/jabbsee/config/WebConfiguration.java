@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @EnableWebMvc
 //@EnableMongoRepositories(basePackages = "com.jabb.jabbsee.repository")
 @Import(MongoConfiguration.class)
-@ComponentScan("com.jabb.jabbsee.controller")
+@ComponentScan("com.jabb.jabbsee")
 public class WebConfiguration extends WebMvcConfigurerAdapter {
 	
 	@Autowired

@@ -5,10 +5,12 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.stereotype.Repository;
 
 import com.jabb.jabbsee.model.Library;
 import com.jabb.jabbsee.model.Serie;
 
+@Repository
 public class LibraryRepositoryImpl implements LibraryRepository {
 	
 	@Autowired
