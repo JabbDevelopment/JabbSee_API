@@ -1,10 +1,14 @@
 package com.jabb.jabbsee.repository;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
-
 import com.jabb.jabbsee.model.Library;
+import com.jabb.jabbsee.model.Serie;
 
-public interface LibraryRepository extends MongoRepository<Library, String>{
+public interface LibraryRepository {
 	
-
+	public Library createLibrary(Library library);
+	public Library updateLibrary(Library library);
+	public Library getLibrary();
+	public Library deleteLibrary(Library library);
+	public Serie addSerie(Serie serie);
+	
 }
