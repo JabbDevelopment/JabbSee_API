@@ -2,11 +2,13 @@ package com.jabb.jabbsee.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 
 @Configuration
+@EnableWebMvc
 //@EnableMongoRepositories(basePackages = "com.jabb.jabbsee.repository")
 public class MongoConfiguration extends AbstractMongoConfiguration {
 

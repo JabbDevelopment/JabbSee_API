@@ -1,7 +1,6 @@
 package com.jabb.jabbsee.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -17,12 +16,7 @@ public class Library implements Serializable {
 	private String owner;
 	
 	public Library() {
-		this.seriesList = new ArrayList<>();
-		//temporary code for testing db
-		Serie serie1 = new Serie("arrow");
-		Serie serie2 = new Serie("game of thrones");
-		this.seriesList.add(serie1);
-		this.seriesList.add(serie2);
+
 	}
 
 	public List<Serie> getSeriesList() {
