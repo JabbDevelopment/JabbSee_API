@@ -5,22 +5,50 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   
+	<properties>
+		<springframework.version>5.0.6.RELEASE</springframework.version>
+		<springsecurity.version>5.0.5.RELEASE</springsecurity.version>
+	</properties>
+  
   <dependencies>
+  
   	<dependency>
     	<groupId>org.springframework</groupId>
     	<artifactId>spring-webmvc</artifactId>
-    	<version>4.3.13.RELEASE</version>
+    	<version>${springframework.version}</version>
 	</dependency>
+	
 	<dependency>
-		<groupId>org.hibernate</groupId>
-    	<artifactId>hibernate-core</artifactId>
-    	<version>5.2.13.Final</version>
+    	<groupId>org.springframework.security</groupId>
+    	<artifactId>spring-security-web</artifactId>
+    	<version>${springsecurity.version}</version>
 	</dependency>
+	
+	<dependency>
+    	<groupId>org.springframework.security</groupId>
+    	<artifactId>spring-security-config</artifactId>
+    	<version>${springsecurity.version}</version>
+	</dependency>
+
+	
 	<dependency>
 		<groupId>com.fasterxml.jackson.core</groupId>
     	<artifactId>jackson-databind</artifactId>
     	<version>2.9.4</version>
 	</dependency>
+	
+	<dependency>
+		<groupId>org.mongodb</groupId>
+    	<artifactId>mongo-java-driver</artifactId>
+    	<version>3.4.2</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>org.springframework.data</groupId>
+    	<artifactId>spring-data-mongodb</artifactId>
+    	<version>1.10.7.RELEASE</version>
+	</dependency>
+	
   </dependencies>
   
   <build>

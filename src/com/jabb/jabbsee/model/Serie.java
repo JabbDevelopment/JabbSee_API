@@ -1,9 +1,18 @@
 package com.jabb.jabbsee.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Serie {
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
+public class Serie implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private String title;
 	private int season;
 	private int episode;
@@ -12,6 +21,8 @@ public class Serie {
 	private String comment;
 	private Date created;
 	private Date changed;
+	
+	public Serie() {}
 	
 	public Serie(String title) {
 		this.title = title;
