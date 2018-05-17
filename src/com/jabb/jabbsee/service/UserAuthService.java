@@ -24,6 +24,7 @@ public class UserAuthService implements UserDetailsService {
         } else {
         	System.out.println("UserAuthService. loadUserByUsername. Username: " + user.getUsername() + " Password: " + user.getPassword());
             UserDetails details = new UserAuthDetail(user);
+            System.out.println("loadUserByUsername: "+ details);
             return details;
         }
 	}

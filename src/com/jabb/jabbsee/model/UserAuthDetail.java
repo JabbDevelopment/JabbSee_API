@@ -19,42 +19,44 @@ public class UserAuthDetail implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
+		System.out.println("UserAuthDetail: getAuthorities()");
 		return null;
 	}
 
 	@Override
 	public String getPassword() {
+		System.out.println("UserAuthDetail PW: "+ user.getPassword());
 		return user.getPassword();
 	}
 
 	@Override
 	public String getUsername() {
+		System.out.println("UserAuthDetail USER: "+ user.getUsername());
 		return user.getUsername();
 	}
 
 	@Override
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return false;
+		System.out.println("UserAuthDetail: isAccountNonExpired()");
+		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return false;
+		System.out.println("UserAuthDetail: isAccountNonLocked()");
+		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return false;
+		System.out.println("UserAuthDetail: isCredentialsNonExpired()");
+		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return false;
+		System.out.println("UserAuthDetail: isEnabled()");
+		return true;
 	}
 
 }

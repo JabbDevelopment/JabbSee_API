@@ -32,11 +32,14 @@ public class UserRepositoryImpl implements UserRepository {
 	public boolean validateUser(User user) {
 		User userFromDB = getUser(user.getUsername());
 		
-		if(userFromDB == null)
+		if(userFromDB == null) {
 			return false;
-		
+		}
 		boolean matches = encoder.matches(user.getPassword(), userFromDB.getPassword());
 		System.out.println("In validateUser. Matches password: " + matches);
+		System.out.println("\n In validateUser. "
+				+ "User-Password: " +user.getPassword() 
+				+ "DB-Password: " +userFromDB.getPassword());
 		
 		return matches;	
 	}
