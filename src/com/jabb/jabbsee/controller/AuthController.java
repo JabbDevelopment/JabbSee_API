@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jabb.jabbsee.model.Library;
 import com.jabb.jabbsee.model.User;
+import com.jabb.jabbsee.repository.LibraryRepository;
 import com.jabb.jabbsee.repository.UserRepository;
 
 @RestController
@@ -16,20 +18,20 @@ public class AuthController {
 	@Autowired
 	private UserRepository userRepo;
 	
-	//LOGIN
-	@RequestMapping(value = "/login", 
-			method = RequestMethod.POST, 
-			consumes = "application/json")
-	public void login(@RequestBody User user) {		
-		userRepo.validateUser(user);
-	}
+	@Autowired
+	private LibraryRepository libraryRepo;
 	
 	//REGISTER USER
 	@RequestMapping(value = "/register", 
 			method = RequestMethod.POST, 
 			consumes = "application/json")
 	public void registerUser(@RequestBody User user) {		
-		userRepo.addUser(user);
+		boolean added = userRepo.addUser(user);
+		if(added == true) {
+			Library library = new Library();
+			library.setOwner(user.getUsername());
+			libraryRepo.createLibrary(library);
+		}
 	}
 	
 	//DELETE USER

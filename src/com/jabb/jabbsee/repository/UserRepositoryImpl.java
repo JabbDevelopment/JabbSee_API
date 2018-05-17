@@ -1,10 +1,15 @@
 package com.jabb.jabbsee.repository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
@@ -28,7 +33,7 @@ public class UserRepositoryImpl implements UserRepository {
 		return userFromDB;
 	}
 	
-	@Override
+	/*@Override
 	public boolean validateUser(User user) {
 		User userFromDB = getUser(user.getUsername());
 		
@@ -42,32 +47,36 @@ public class UserRepositoryImpl implements UserRepository {
 				+ "DB-Password: " +userFromDB.getPassword());
 		
 		return matches;	
-	}
+	}*/
 
 	@Override
 	public boolean addUser(User user) {
-		if(validateUser(user) == true)
+		User userFromDB = getUser(user.getUsername());	
+		if(userFromDB != null) {
 			return false;
+		}
 			
 		String result = encoder.encode(user.getPassword());
 		
 		System.out.println("Encoded password: " + result);
 		
+		/*List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+
+		grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+
+	    user.setGrantedAuthorities(grantedAuthorities);*/
 		
 		user.setPassword(result);
 		
 		mongoTemplate.insert(user, COLLECTION_NAME);
 			
-		User userFromDB = getUser(user.getUsername());
+		User addedUser = getUser(user.getUsername());
 			
-		return userFromDB != null;
+		return addedUser != null;
 	}
 
 	@Override
-	public boolean deleteUser(User user) {
-		if(validateUser(user) == false)
-			return false;
-		
+	public boolean deleteUser(User user) {		
 		Query query = Query.query(Criteria.where(USERNAME_VAR).is(user.getUsername()));
 		mongoTemplate.remove(query, Library.class, COLLECTION_NAME);
 		return true;
@@ -75,9 +84,6 @@ public class UserRepositoryImpl implements UserRepository {
 
 	@Override
 	public boolean changePassword(User user) {
-		if(validateUser(user) == false)
-			return false;	
-		
 		Query query = Query.query(Criteria.where(USERNAME_VAR).is(user.getUsername()));
 		Update update = new Update().set(PASSWORD_VAR, user.getPassword());
 		mongoTemplate.updateFirst(query, update, COLLECTION_NAME);
