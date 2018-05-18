@@ -24,6 +24,7 @@ public class UserRepositoryImpl implements UserRepository {
 	private final String COLLECTION_NAME = "userCollection";
 	private final String USERNAME_VAR = "username";
 	private final String PASSWORD_VAR = "password";
+	//private final String USER = "userRole";
 	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
 	
 	@Override

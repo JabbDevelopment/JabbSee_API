@@ -3,6 +3,8 @@ package com.jabb.jabbsee.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,6 +13,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.security.web.csrf.CsrfTokenRepository;
 
 import com.jabb.jabbsee.service.UserAuthService;
 
@@ -42,18 +47,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		System.out.println("SecurityConfig. Configure-web.");
-		web.ignoring().antMatchers("/register");
-		web.debug(true);
+		System.out.println("SecurityConfig. Configure-WEB.");
+		
+		web
+			.ignoring()
+			.antMatchers("/register");
+			
+		
+		//web.debug(true);
 	}
 	
-	/* @Override
+	@Override
 	  protected void configure(HttpSecurity http) throws Exception {
-		 System.out.println("SecurityConfig. Configure-http.");
+		 System.out.println("SecurityConfig. Configure-HTTP.");
+		 
 	    http
-	      .authorizeRequests().antMatchers("/library").permitAll().anyRequest().authenticated();
-	      //.and().csrf().disable();
-	  }*/
+	      .httpBasic()
+	    .and()
+	      	.authorizeRequests()
+	        .antMatchers(HttpMethod.POST, "/library").authenticated()
+	        .antMatchers(HttpMethod.PUT, "/library").authenticated()
+	        .antMatchers(HttpMethod.DELETE, "/library").authenticated()
+	    .and()
+	      	.csrf().disable();
+	    	
+    		
+	    
+	  }
 	
 	
 

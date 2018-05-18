@@ -26,6 +26,7 @@ public class LibraryRepositoryImpl implements LibraryRepository {
 
 	@Override
 	public Library updateLibrary(Library library) {
+		System.out.println("LibraryRepo. Updating library");
 		String owner = library.getOwner();
 		Query query = Query.query(Criteria.where(OWNER_VAR).is(owner));
 		Update update = new Update().set(SERIES_LIST_VAR, library.getSeriesList());

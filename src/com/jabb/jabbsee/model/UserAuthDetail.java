@@ -1,8 +1,12 @@
 package com.jabb.jabbsee.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
+import org.springframework.context.annotation.Role;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class UserAuthDetail implements UserDetails {
@@ -20,7 +24,12 @@ public class UserAuthDetail implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		System.out.println("UserAuthDetail: getAuthorities()");
-		return null;
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		
+			authorities.add(new SimpleGrantedAuthority("USER"));
+			System.out.println("ROLE: " +authorities.size());
+
+		return authorities;
 	}
 
 	@Override
@@ -58,5 +67,5 @@ public class UserAuthDetail implements UserDetails {
 		System.out.println("UserAuthDetail: isEnabled()");
 		return true;
 	}
-
+	
 }
