@@ -31,7 +31,6 @@ public class LibraryController {
 	}
 	
 	//UPDATE LIBRARY
-	//@PreAuthorize("#library.getUsername == principal.getName()")
 	@RequestMapping(value = "/library", 
 			method = RequestMethod.POST, 
 			consumes = "application/json", 

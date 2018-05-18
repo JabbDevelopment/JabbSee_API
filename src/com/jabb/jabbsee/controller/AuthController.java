@@ -1,7 +1,10 @@
 
 package com.jabb.jabbsee.controller;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,6 +35,15 @@ public class AuthController {
 			library.setOwner(user.getUsername());
 			libraryRepo.createLibrary(library);
 		}
+	}
+	
+	//LOGIN
+	@RequestMapping(value = "/user", 
+		method = RequestMethod.GET)
+	public ResponseEntity<String> login(Principal principal) {	
+		System.out.println("AuthController. Login method");
+		return ResponseEntity.ok().body(principal.getName());
+		//userRepo.validateUser(user);
 	}
 	
 	//DELETE USER
