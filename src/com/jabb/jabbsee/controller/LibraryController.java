@@ -37,6 +37,9 @@ public class LibraryController {
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	
 	public ResponseEntity<Library> updateLibrary(@RequestBody Library library, Principal principal) {
+		if(!principal.getName().equals(library.getOwner())) {
+			return ResponseEntity.badRequest().body(library);
+		}
 		System.out.println("Updating library");
 		Library updatedLibrary = libraryRepo.updateLibrary(library);
 		return ResponseEntity.ok().body(updatedLibrary);	
@@ -48,7 +51,10 @@ public class LibraryController {
 			consumes = "application/json", 
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	
-	public ResponseEntity<Library> deleteLibrary(@RequestBody Library library) {
+	public ResponseEntity<Library> deleteLibrary(@RequestBody Library library, Principal principal) {
+		if(!principal.getName().equals(library.getOwner())) {
+			return ResponseEntity.badRequest().body(library);
+		}
 		Library deletedLibrary = libraryRepo.deleteLibrary(library);
 		return ResponseEntity.ok().body(deletedLibrary);	
 	}
