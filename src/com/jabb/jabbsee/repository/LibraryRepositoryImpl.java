@@ -8,7 +8,6 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import com.jabb.jabbsee.model.Library;
-import com.jabb.jabbsee.model.Serie;
 
 @Repository
 public class LibraryRepositoryImpl implements LibraryRepository {
@@ -27,6 +26,7 @@ public class LibraryRepositoryImpl implements LibraryRepository {
 
 	@Override
 	public Library updateLibrary(Library library) {
+		System.out.println("LibraryRepo. Updating library");
 		String owner = library.getOwner();
 		Query query = Query.query(Criteria.where(OWNER_VAR).is(owner));
 		Update update = new Update().set(SERIES_LIST_VAR, library.getSeriesList());
@@ -36,8 +36,8 @@ public class LibraryRepositoryImpl implements LibraryRepository {
 	}
 
 	@Override
-	public Library getLibrary() {
-		Query query = Query.query(Criteria.where(OWNER_VAR).is("bea"));
+	public Library getLibrary(String owner) {
+		Query query = Query.query(Criteria.where(OWNER_VAR).is(owner));
 		Library library = mongoTemplate.findOne(query, Library.class, COLLECTION_NAME);
 		return library;
 	}
@@ -50,12 +50,12 @@ public class LibraryRepositoryImpl implements LibraryRepository {
 		return deletedLibrary;
 	}
 
-	@Override
+	/*@Override
 	public Serie addSerie(Serie serie) {
 		Query query = Query.query(Criteria.where(OWNER_VAR).is("bea"));
 		Update update = new Update().push(SERIES_LIST_VAR, serie);
 		mongoTemplate.updateFirst(query, update, COLLECTION_NAME);
 		return serie;
-	}
+	}*/
 
 }
